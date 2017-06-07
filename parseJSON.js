@@ -49,10 +49,6 @@ var parseJSON = function(json) {
 				modifiedKey = key.replace(/["']/g, "").replace(/\s+/g, '')
 				modifiedVal = val.replace(/["']/g, "").replace(/\s+/g, '').replace('}','')
 
-  			if (!isNaN(modifiedVal)) {
-  				val = maintainPrecision(modifiedVal)
-  			}  			
-
   			// Account for nested objects
 				if (indexOfSecondBracket > -1) {
 					var innerKey = modifiedVal.split(':')[0]
