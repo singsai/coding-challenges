@@ -10,12 +10,11 @@ var maintainPrecision = function(element) {
 		}
 	}
 	if (dotIndex > -1 && zeroCount > 0) {
-		element = parseFloat(element).toFixed(zeroCount)	
-		return element
+		element = parseFloat(element).toFixed(zeroCount)			
 	} else {		
-		element = parseFloat(element)
-		return element
+		element = parseFloat(element)		
 	}	
+	return element
 }
 
 var parseJSON = function(json) {
