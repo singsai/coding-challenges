@@ -19,8 +19,33 @@ var maintainPrecision = function(element) {
 
 var parseJSON = function(json) {
 	var result
-
-	if (json[0] === '{') {
+	
+	if (json[0] === '[') {
+		result = []
+	  var element = ''
+	  for (var i = 0; i < json.length; i++) {
+	  	let char = json[i]
+	  	if (typeof char === 'string' ) {
+	  		if (char !== '[' && 
+	  				char !== ']' && 
+	  				char !== ',' && 
+	  				char !== ' ' ) 
+	  		{
+	  			element+=char
+	  		} else {
+	  			if (element !== '') {
+		  			if (!isNaN(element)) {
+		  				result.push(maintainPrecision(element))
+		  			} else {
+		  				result.push(element.replace('"', '').replace('"', ''))	
+		  			}  					  				
+	  				element = ''
+	  			}
+	  			continue
+	  		}
+	  	}
+	  }		
+	} else {
 		result = {}
 		var element = '', colons = []
 		var jsonContentInMainObj, jsonContentInMainObjArray
@@ -65,31 +90,6 @@ var parseJSON = function(json) {
 				}
 			}			
 		}
-	} else {
-		result = []
-	  var element = ''
-	  for (var i = 0; i < json.length; i++) {
-	  	let char = json[i]
-	  	if (typeof char === 'string' ) {
-	  		if (char !== '[' && 
-	  				char !== ']' && 
-	  				char !== ',' && 
-	  				char !== ' ' ) 
-	  		{
-	  			element+=char
-	  		} else {
-	  			if (element !== '') {
-		  			if (!isNaN(element)) {
-		  				result.push(maintainPrecision(element))
-		  			} else {
-		  				result.push(element.replace('"', '').replace('"', ''))	
-		  			}  					  				
-	  				element = ''
-	  			}
-	  			continue
-	  		}
-	  	}
-	  }		
 	}
 	return result
 }
