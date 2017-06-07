@@ -19,17 +19,16 @@ var maintainPrecision = function(element) {
 
 var parseJSON = function(json) {
 	var result
-	
+
 	if (json[0] === '[') {
 		result = []
 	  var element = ''
+	  var charsToIgnore = new Set(['[',']',',',' '])
+	  
 	  for (var i = 0; i < json.length; i++) {
 	  	let char = json[i]
 	  	if (typeof char === 'string' ) {
-	  		if (char !== '[' && 
-	  				char !== ']' && 
-	  				char !== ',' && 
-	  				char !== ' ' ) 
+	  		if (!charsToIgnore.has(char)) 
 	  		{
 	  			element+=char
 	  		} else {
