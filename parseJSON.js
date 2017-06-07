@@ -1,3 +1,4 @@
+// This function make sure 20.0 or 20.00 doesn't become 20 after parseFloat
 var maintainPrecision = function(element) {
 	var dotIndex = element.indexOf('.')
 	var zeroCount = 0
@@ -20,6 +21,7 @@ var maintainPrecision = function(element) {
 var parseJSON = function(json) {
 	var result
 
+	// json is an object
 	if (json[0] === '{') {
 		result = {}
 		var element = ''
@@ -51,6 +53,7 @@ var parseJSON = function(json) {
   				val = maintainPrecision(modifiedVal)
   			}  			
 
+  			// Account for nested objects
 				if (indexOfSecondBracket > -1) {
 					var innerKey = modifiedVal.split(':')[0]
 					var formattedInnerKey = innerKey.slice(indexOfSecondBracket, innerKey.length)
@@ -65,7 +68,8 @@ var parseJSON = function(json) {
 				}
 			}			
 		}
-	} else {
+	// json is a string
+	} else { 
 		result = []
 	  var element = ''
 	  var ignoredCharacters = new Set(['[', ']', ',', ' '])
