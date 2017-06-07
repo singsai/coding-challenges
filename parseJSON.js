@@ -51,10 +51,10 @@ var parseJSON = function(json) {
 					var formattedInnerKey = innerKey.slice(indexOfSecondBracket, innerKey.length)
 																					.replace(/["']/g, "").replace(/\s+/g, '')
 					var innerVal = modifiedVal.split(':')[1].replace(/["']/g, "").replace(/\s+/g, '')
-					var tempObj = {}
-					tempObj[formattedInnerKey] = innerVal
+					var innerObj = {}
+					innerObj[formattedInnerKey] = innerVal
 
-					result[modifiedKey] = tempObj
+					result[modifiedKey] = innerObj
 					
 					// there is no nested object
 				} else {
