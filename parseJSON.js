@@ -62,7 +62,7 @@ var parseJSON = function(json) {
 				}
 			}			
 		}
-	// json is a string
+	// json is an array
 	} else { 
 		result = []
 	  var element = ''
