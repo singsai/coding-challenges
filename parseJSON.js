@@ -46,7 +46,7 @@ var parseJSON = function(json) {
 	  }		
 	} else {
 		result = {}
-		var element = '', colons = []
+		var element = ''
 		var jsonContentInMainObj, jsonContentInMainObjArray
 
 		jsonContentInMainObj = json.slice(1, json.length-1)		
