@@ -11,7 +11,7 @@ var maintainPrecision = function(element) {
 	if (dotIndex > -1 && zeroCount > 0) {
 		element = parseFloat(element).toFixed(zeroCount)	
 		return element
-	} else {
+	} else {		
 		element = parseFloat(element)
 		return element
 	}	
@@ -69,7 +69,7 @@ var parseJSON = function(json) {
 		result = []
 	  var element = ''
 	  var ignoredCharacters = new Set(['[', ']', ',', ' '])
-	  
+
 	  for (let i = 0; i < json.length; i++) {
 	  	let char = json[i]
 	  	if (typeof char === 'string' ) {
