@@ -3,7 +3,7 @@ var maintainPrecision = function(element) {
 	var zeroCount = 0
 	var dotToEndOfString = element.slice(dotIndex, element.length)
 	
-	for (var k = 0; k < dotToEndOfString.length; k++) {
+	for (let k = 0; k < dotToEndOfString.length; k++) {
 		if (dotToEndOfString[k]==='0') {
 			zeroCount++
 		}
@@ -20,19 +20,42 @@ var maintainPrecision = function(element) {
 var parseJSON = function(json) {
 	var result
 
-	if (json[0] === '{') {
+	if (json[0] === '[') {
+		result = []
+	  var element = ''
+	  var charsToIgnore = new Set(['[',']',',',' '])
+	  
+	  for (let i = 0; i < json.length; i++) {
+	  	let char = json[i]
+	  	if (typeof char === 'string' ) {
+	  		if (!charsToIgnore.has(char)) {
+	  			element+=char
+	  		} else {
+	  			if (element !== '') {
+		  			if (!isNaN(element)) {
+		  				result.push(maintainPrecision(element))
+		  			} else {
+		  				result.push(element.replace('"', '').replace('"', ''))	
+		  			}  					  				
+	  				element = ''
+	  			}
+	  			continue
+	  		}
+	  	}
+	  }		
+	} else {
 		result = {}
-		var element = '', colons = []
-		var jsonContentInMainObj, jsonContentInMainObjArray
+		var element = ''
+		var jsonContentInMainObj
 
 		jsonContentInMainObj = json.slice(1, json.length-1)		
 		jsonContentInMainObj = jsonContentInMainObj.split(',')
 
-		for (var el = 0; el < jsonContentInMainObj.length; el++) {
+		for (let el = 0; el < jsonContentInMainObj.length; el++) {
 
 			var currentElement = jsonContentInMainObj[el]
 
-			for (var k = 0; k < currentElement.length; k++) {
+			for (let k = 0; k < currentElement.length; k++) {
 
 				var key, val
 				var indexOfColon = currentElement.indexOf(':')
@@ -65,31 +88,6 @@ var parseJSON = function(json) {
 				}
 			}			
 		}
-	} else {
-		result = []
-	  var element = ''
-	  for (var i = 0; i < json.length; i++) {
-	  	let char = json[i]
-	  	if (typeof char === 'string' ) {
-	  		if (char !== '[' && 
-	  				char !== ']' && 
-	  				char !== ',' && 
-	  				char !== ' ' ) 
-	  		{
-	  			element+=char
-	  		} else {
-	  			if (element !== '') {
-		  			if (!isNaN(element)) {
-		  				result.push(maintainPrecision(element))
-		  			} else {
-		  				result.push(element.replace('"', '').replace('"', ''))	
-		  			}  					  				
-	  				element = ''
-	  			}
-	  			continue
-	  		}
-	  	}
-	  }		
 	}
 	return result
 }
@@ -99,7 +97,10 @@ console.log(
 	'\nSTEP 2:',
 	parseJSON(" [ 10, 20.0, \"hello\", 0.2 ] "),
 	'\nSTEP 3:',
-	parseJSON("{ \"key\": { \"foo\": \"bar\", \"hello\" : 100 } }"),
+	parseJSON("{ \"foo\": \"bar\", \"hello\" : 100 }"),
 	'\nSTEP 4:',
-	parseJSON("{ \"foo\": \"bar\", \"hello\" : 100 }")
+	parseJSON("{ \"key\": { \"foo\": \"bar\", \"hello\" : 100 } }")
+	// ,
+	// '\nSTEP 5:',
+	// parseJSON("{ \"key\": { \"foo\": \"bar\", \"hello\" : 100 }, \"key2\": { \"foo2\": \"bar2\", \"hello2\" : 200 } }")
 )
