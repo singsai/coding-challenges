@@ -23,39 +23,45 @@ var parseJSON = function(json) {
 	if (json[0] === '{') {
 		result = {}
 		var element = '', colons = []
-		var modifiedJson, modifiedJsonArray
+		var jsonContentInMainObj, jsonContentInMainObjArray
 
-		modifiedJson = json.slice(1, json.length-1)		
-		modifiedJson = modifiedJson.split(',')
+		jsonContentInMainObj = json.slice(1, json.length-1)		
+		jsonContentInMainObj = jsonContentInMainObj.split(',')
 
-		for (var el = 0; el < modifiedJson.length; el++) {
-			for (var k = 0; k < modifiedJson[el].length; k++) {
-				// console.log('modifiedJson[el]: ', modifiedJson[el][k])
+		for (var el = 0; el < jsonContentInMainObj.length; el++) {
+
+			var currentElement = jsonContentInMainObj[el]
+
+			for (var k = 0; k < currentElement.length; k++) {
+
 				var key, val
-				var indexOfColon = modifiedJson[el].indexOf(':')
+				var indexOfColon = currentElement.indexOf(':')
 
-				key = modifiedJson[el].slice(0, indexOfColon)
-				val = modifiedJson[el].slice(indexOfColon+1, modifiedJson[el].length)
+				key = currentElement.slice(0, indexOfColon)
+				val = currentElement.slice(indexOfColon+1, currentElement.length)
 
 				var indexOfSecondBracket = val.indexOf('{')
 
-				key = key.replace(/["']/g, "").replace(/\s+/g, '')
-				val = val.replace(/["']/g, "").replace(/\s+/g, '').replace('}','')
+				var modifiedKey, modifiedVal
 
-  			if (!isNaN(val)) {
-  				val = maintainPrecision(val)
+				modifiedKey = key.replace(/["']/g, "").replace(/\s+/g, '')
+				modifiedVal = val.replace(/["']/g, "").replace(/\s+/g, '').replace('}','')
+
+  			if (!isNaN(modifiedVal)) {
+  				val = maintainPrecision(modifiedVal)
   			}  			
 
 				if (indexOfSecondBracket > -1) {
-					var innerKey = val.split(':')[0]
-					var formattedInnerKey = innerKey.slice(indexOfSecondBracket, innerKey.length).replace(/["']/g, "").replace(/\s+/g, '')
-					var innerVal = val.split(':')[1].replace(/["']/g, "").replace(/\s+/g, '')
+					var innerKey = modifiedVal.split(':')[0]
+					var formattedInnerKey = innerKey.slice(indexOfSecondBracket, innerKey.length)
+																					.replace(/["']/g, "").replace(/\s+/g, '')
+					var innerVal = modifiedVal.split(':')[1].replace(/["']/g, "").replace(/\s+/g, '')
 					var tempObj = {}
 					tempObj[formattedInnerKey] = innerVal
 
-					result[key] = tempObj
+					result[modifiedKey] = tempObj
 				} else {
-					result[key] = val					
+					result[modifiedKey] = modifiedVal					
 				}
 			}			
 		}
