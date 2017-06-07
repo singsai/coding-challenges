@@ -22,8 +22,8 @@ var parseJSON = function(json) {
 
 	if (json[0] === '{') {
 		result = {}
-		var element = '', colons = []
-		var jsonContentInMainObj, jsonContentInMainObjArray
+		var element = ''
+		var jsonContentInMainObj
 
 		jsonContentInMainObj = json.slice(1, json.length-1)		
 		jsonContentInMainObj = jsonContentInMainObj.split(',')
