@@ -29,11 +29,9 @@ var parseJSON = function(json) {
 		jsonContentInMainObj = json.slice(1, json.length-1).split(',')		
 
 		for (let el = 0; el < jsonContentInMainObj.length; el++) {
-
 			var currentElement = jsonContentInMainObj[el]
 
 			for (let k = 0; k < currentElement.length; k++) {
-
 				var key, val
 				var indexOfColon = currentElement.indexOf(':')
 
@@ -57,6 +55,8 @@ var parseJSON = function(json) {
 					tempObj[formattedInnerKey] = innerVal
 
 					result[modifiedKey] = tempObj
+					
+					// there is no nested object
 				} else {
 					result[modifiedKey] = modifiedVal					
 				}
