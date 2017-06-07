@@ -28,8 +28,7 @@ var parseJSON = function(json) {
 	  for (var i = 0; i < json.length; i++) {
 	  	let char = json[i]
 	  	if (typeof char === 'string' ) {
-	  		if (!charsToIgnore.has(char)) 
-	  		{
+	  		if (!charsToIgnore.has(char)) {
 	  			element+=char
 	  		} else {
 	  			if (element !== '') {
