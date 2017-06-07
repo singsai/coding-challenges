@@ -68,14 +68,12 @@ var parseJSON = function(json) {
 	} else {
 		result = []
 	  var element = ''
+	  var ignoredCharacters = new Set(['[', ']', ',', ' '])
+	  
 	  for (let i = 0; i < json.length; i++) {
 	  	let char = json[i]
 	  	if (typeof char === 'string' ) {
-	  		if (char !== '[' && 
-	  				char !== ']' && 
-	  				char !== ',' && 
-	  				char !== ' ' ) 
-	  		{
+	  		if (!ignoredCharacters.has(char)) {
 	  			element+=char
 	  		} else {
 	  			if (element !== '') {
