@@ -22,10 +22,7 @@ var parseJSON = function(json) {
 
 	if (json[0] === '{') {
 		result = {}
-		var element = ''
-		var colons = []
-		var openers = []
-		var closers = []
+		var element = '', colons = []
 		var modifiedJson, modifiedJsonArray
 
 		modifiedJson = json.slice(1, json.length-1)		
@@ -34,8 +31,7 @@ var parseJSON = function(json) {
 		for (var el = 0; el < modifiedJson.length; el++) {
 			for (var k = 0; k < modifiedJson[el].length; k++) {
 				// console.log('modifiedJson[el]: ', modifiedJson[el][k])
-				var key
-				var val
+				var key, val
 				var indexOfColon = modifiedJson[el].indexOf(':')
 
 				key = modifiedJson[el].slice(0, indexOfColon)
@@ -57,8 +53,6 @@ var parseJSON = function(json) {
 					var tempObj = {}
 					tempObj[formattedInnerKey] = innerVal
 
-					// console.log(formattedInnerKey, innerVal)
-					// console.log(tempObj)
 					result[key] = tempObj
 				} else {
 					result[key] = val					
