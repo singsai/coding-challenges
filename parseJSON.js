@@ -97,7 +97,7 @@ console.log(
 	'\nSTEP 2:',
 	parseJSON(" [ 10, 20.0, \"hello\", 0.2 ] "),
 	'\nSTEP 3:',
-	parseJSON("{ \"key\": { \"foo\": \"bar\", \"hello\" : 100 } }"),
+	parseJSON("{ \"foo\": \"bar\", \"hello\" : 100 }"),
 	'\nSTEP 4:',
-	parseJSON("{ \"foo\": \"bar\", \"hello\" : 100 }")
+	parseJSON("{ \"key\": { \"foo\": \"bar\", \"hello\" : 100 } }")
 )
