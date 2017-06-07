@@ -91,11 +91,12 @@ var parseJSON = function(json) {
 }
 
 console.log(
-	'STEP 1 is already accounted for in STEP 2.',
-	'\nSTEP 2:',
+	'First Step :',
+	parseJSON(" [ 10 , 20.0, 0.2 ] "),
+	'\nSecond Step:',
 	parseJSON(" [ 10, 20.0, \"hello\", 0.2 ] "),
-	'\nSTEP 3:',
+	'\nThird Step: ',
 	parseJSON("{ \"key\": { \"foo\": \"bar\", \"hello\" : 100 } }"),
-	'\nSTEP 4:',
+	'\nFourth Step:',
 	parseJSON("{ \"foo\": \"bar\", \"hello\" : 100 }")
 )
