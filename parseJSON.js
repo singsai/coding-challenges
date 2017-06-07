@@ -3,7 +3,7 @@ var maintainPrecision = function(element) {
 	var zeroCount = 0
 	var dotToEndOfString = element.slice(dotIndex, element.length)
 	
-	for (var k = 0; k < dotToEndOfString.length; k++) {
+	for (let k = 0; k < dotToEndOfString.length; k++) {
 		if (dotToEndOfString[k]==='0') {
 			zeroCount++
 		}
@@ -25,7 +25,7 @@ var parseJSON = function(json) {
 	  var element = ''
 	  var charsToIgnore = new Set(['[',']',',',' '])
 	  
-	  for (var i = 0; i < json.length; i++) {
+	  for (let i = 0; i < json.length; i++) {
 	  	let char = json[i]
 	  	if (typeof char === 'string' ) {
 	  		if (!charsToIgnore.has(char)) {
@@ -51,11 +51,11 @@ var parseJSON = function(json) {
 		jsonContentInMainObj = json.slice(1, json.length-1)		
 		jsonContentInMainObj = jsonContentInMainObj.split(',')
 
-		for (var el = 0; el < jsonContentInMainObj.length; el++) {
+		for (let el = 0; el < jsonContentInMainObj.length; el++) {
 
 			var currentElement = jsonContentInMainObj[el]
 
-			for (var k = 0; k < currentElement.length; k++) {
+			for (let k = 0; k < currentElement.length; k++) {
 
 				var key, val
 				var indexOfColon = currentElement.indexOf(':')
