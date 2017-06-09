@@ -1,22 +1,3 @@
-// This function make sure 20.0 or 20.00 doesn't become 20 after parseFloat
-var maintainPrecision = function(element) {
-  var dotIndex = element.indexOf('.')
-  var zeroCount = 0
-  var dotToEndOfString = element.slice(dotIndex, element.length)
-  
-  for (let k = 0; k < dotToEndOfString.length; k++) {
-    if (dotToEndOfString[k]==='0') {
-      zeroCount++
-    }
-  }
-  if (dotIndex > -1 && zeroCount > 0) {
-    element = parseFloat(element).toFixed(zeroCount)      
-  } else {    
-    element = parseFloat(element)   
-  } 
-  return element
-}
-
 var parseJSON = function(json) {
   var result
 
@@ -76,7 +57,7 @@ var parseJSON = function(json) {
         } else {
           if (element !== '') {
             if (!isNaN(element)) {
-              result.push(maintainPrecision(element))
+              result.push(parseFloat(element))
             } else {
               result.push(element.replace('"', '').replace('"', ''))  
             }                     
